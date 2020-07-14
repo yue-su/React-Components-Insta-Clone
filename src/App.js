@@ -14,13 +14,12 @@ import SearchBar from './components/SearchBar/SearchBar'
 import data from './dummy-data'
 import "./App.css";
 
-console.log(data)
-
 const App = () => {
   // Create a state called 'posts' to hold the list of posts, initializing to dummyData.
   // To make the search bar work (which is stretch) we'd need another state to hold the search term.
   const [posts, setPosts] = useState(data)
-  const [keyword, setKeyword] = useState('')
+  //stretch -- setting up the start for search bar
+  const [term, setTerm] = useState('')
 
   const likePost = postId => {
 
@@ -36,15 +35,26 @@ const App = () => {
     //  - otherwise just return the post object unchanged.
   };
 
-  const search = keyword => { 
-    setKeyword(keyword)
-    console.log(keyword)
+  const onInputChange = (event) => { 
+    setTerm(event.target.value)
+  }
+
+  //stretch -- setting up the function when sumbit the form by default
+  const onFormSubmit = (event) => {
+    //at first, it needs to prevent the form from refreshing the page once the user hits enter
+    event.preventDefault()
+    //if the input is empty, return the whole data
+    if (term === '') { setPosts(data) } else
+    //if the input includes a string from certain username, return the item  
+    setPosts(
+      posts.filter(item => item.username.includes(term))
+    )
   }
 
   return (
     <div className="App">
       {/* Add SearchBar and Posts here to render them */}
-      <SearchBar keyword={keyword} search={search} />
+      <SearchBar term={term} onInputChange={onInputChange} onFormSubmit={onFormSubmit} />
       <Posts posts = {posts} likePost ={likePost} />
       {/* Check the implementation of each component, to see what props they require, if any! */}
     </div>

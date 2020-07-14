@@ -9,9 +9,9 @@ const Posts = (props) => {
   return (
     <div className="posts-container-wrapper">
       {
-        posts.map(item => {
+        posts.map((item, index) => {
           return (
-            <Post post={item} likePost={likePost} />
+            <Post key={index} post={item} likePost={likePost} />
           )
         })
       }

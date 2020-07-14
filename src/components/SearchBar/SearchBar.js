@@ -7,19 +7,21 @@ import "./SearchBar.css";
 
 const SearchBar = (props) => {
 
-  const {keyword, search} = props
-  
+  const {term, onInputChange, onFormSubmit} = props
+
+
 
   return (
     <div className="search-bar-wrapper">
       <div className="social">
         <FontAwesomeIcon icon={faInstagram} />
       </div>
-      <form className="search-form">
+      <form onSubmit={onFormSubmit} className="search-form">
         <input
           type="text"
           placeholder="Search"
-          onChange = {(event) => search(event.data)}
+          value={term}
+          onChange = {onInputChange}
         />
       </form>
       <div className="social-wrapper">
