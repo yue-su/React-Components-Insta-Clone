@@ -1,4 +1,5 @@
 // You will add code to this file
+// You will add code to this file
 import React from 'react';
 import Comments from '../Comments/Comments';
 import LikeSection from './LikeSection';
@@ -22,7 +23,7 @@ const Post = props => {
         />
       </div>
       {/* LikeSection is missing a prop it needs to function! */}
-      <LikeSection likePost={() => likePost(post.id)} />
+      <LikeSection likeCount={post.likes} likePost={() => likePost(post.id)} />
       {/* Comments also wants its props! */}
       <Comments />
     </div>
